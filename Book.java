@@ -1,86 +1,90 @@
 package libraryApp;
 
 public class Book {
-	
-	private int isbn;
-	private String title;
-	private String author;
-	private String genre;
-	private int quantity;
-	private int checkedOut;
-	private int checkedIn;
-	
-	//Constructor for book object
-	public Book(int isbn, String title, String author, String genre, int quantity, int checkedOut) {
-		this.isbn = isbn;
-		this.title = title;
-		this.author = author;
-		this.genre = genre;
-		this.quantity = quantity;
-		this.checkedOut = checkedOut;
-		this.checkedIn = quantity-checkedOut;
-	}
 
-	public int getCheckedIn() {
-		return checkedIn;
-	}
+    private int isbn;
+    private String title;
+    private String author;
+    private String genre;
+    private int quantity;
+    private int checkedOut;
 
-	public void setCheckedIn(int checkedIn) {
-		this.checkedIn = checkedIn;
-	}
+    // Constructor for book object
+    public Book(int isbn, String title, String author, String genre, int quantity, int checkedOut) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.quantity = quantity;
+        this.checkedOut = Math.max(0, Math.min(checkedOut, quantity)); // Ensure checkedOut is within bounds
+    }
 
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
-	}
+    public void setCheckedOut(int checkedOut) {
+        // Ensure that the checked out count does not exceed the quantity
+        if (checkedOut >= 0 && checkedOut <= quantity) {
+            this.checkedOut = checkedOut;
+        } else {
+            throw new IllegalArgumentException("Checked out cannot be negative or exceed total quantity.");
+        }
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public int getCheckedIn() {
+        return quantity - checkedOut; // Calculate checked in as the available quantity
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
+    }
 
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setCheckedOut(int checkedOut) {
-		this.checkedOut = checkedOut;
-	}
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
-	//Getter Methods
-	public int getIsbn() {
-		return isbn;
-	}
+    public void setQuantity(int quantity) {
+        if (quantity >= 0) {
+            this.quantity = quantity;
+        } else {
+            throw new IllegalArgumentException("Quantity cannot be negative.");
+        }
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    // Getter Methods
+    public int getIsbn() {
+        return isbn;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getGenre() {
-		return genre;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public String getGenre() {
+        return genre;
+    }
 
-	public int getCheckedOut() {
-		return checkedOut;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	
-	
-	
+    public int getCheckedOut() {
+        return checkedOut;
+    }
+
+    // Override toString for easy display of book details
+    @Override
+    public String toString() {
+        return String.format("Title: %s, Author: %s, Genre: %s, ISBN: %d, Quantity: %d, Checked Out: %d, Available: %d",
+                title, author, genre, isbn, quantity, checkedOut, getCheckedIn());
+    }
 }
-
- 
