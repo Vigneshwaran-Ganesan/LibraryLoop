@@ -20,7 +20,7 @@ public class Main {
             System.out.print("\nChoose any option: ");
             
             userChoice = scan.nextInt();
-            scan.nextLine();  // Clear the buffer
+            scan.nextLine();  
 
             switch (userChoice) {
                 case 1:
@@ -28,12 +28,12 @@ public class Main {
                     app.findByTitle(scan.nextLine());
                     break;
                 case 2:
-                    System.out.print("Enter ISBN number: ");  // Changed println to print
+                    System.out.print("Enter ISBN number: ");  
                     app.findByISBN(scan.nextInt());
-                    scan.nextLine();  // Clear the buffer
+                    scan.nextLine();  
                     break;
                 case 3:
-                    System.out.print("Enter Genre: ");  // Changed println to print
+                    System.out.print("Enter Genre: ");  
                     app.findByGenre(scan.nextLine());
                     break;
                 case 4:
@@ -53,7 +53,7 @@ public class Main {
 
     // Checking book In
     private static void checkIn() {
-        System.out.print("Enter Book's ISBN number: ");  // Changed println to print
+        System.out.print("Enter Book's ISBN number: ");  
         int isbnNum = scan.nextInt();
         scan.nextLine();  // Clear the buffer
         getStatus(isbnNum);
@@ -70,7 +70,7 @@ public class Main {
 
     // Checking book Out
     private static void checkOut() {
-        System.out.print("\nEnter Book's ISBN number: ");  // Changed println to print
+        System.out.print("\nEnter Book's ISBN number: ");  
         int isbnNum = scan.nextInt();
         scan.nextLine();  // Clear the buffer
         int bookAvailable = app.findISBN(isbnNum);
